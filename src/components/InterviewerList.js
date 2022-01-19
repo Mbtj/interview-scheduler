@@ -2,6 +2,7 @@
 import React, { Fragment } from "react";
 import classNames from "classnames";
 import "components/InterviewerList.scss";
+import InterviewerListItem from "./InterviewerListItem";
 
 // const interviewers = [
 //   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -12,20 +13,24 @@ import "components/InterviewerList.scss";
 // ];
 
 export default function InterviewerList(props) {
-  const classes = classNames("interviewers");
+  // const classes = classNames("interviewers");
 
+  // alert(props.interviewers);
 
-  const interviewers = props.interviewers.map((interviewer) => <InterviewerList
+  const interviewers = props.interviewers.map((interviewer) => {
+  return (
+  <InterviewerListItem
     id={interviewer.id}
     name={interviewer.name}
     avatar={interviewer.avatar}
     setInterviewer={props.setInterviewer}
     selected={props.interviewer === interviewer.id}
-  />
-  );
+  />);
+  });
+
 
   return (
-    <section className={classes}>
+    <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
       <ul className="interviewers__list">{interviewers}</ul>
     </section>

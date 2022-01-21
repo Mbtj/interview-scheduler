@@ -9,4 +9,16 @@ function getAppointmentsForDay(state, day) {
   }
 }
 
-module.exports = { getAppointmentsForDay }
+function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+
+  const interviewerID = interview.interviewer;
+  const interviewer = state.interviewers[interviewerID];
+
+  return { student: interview.student, interviewer};
+
+}
+
+module.exports = { getAppointmentsForDay, getInterview }

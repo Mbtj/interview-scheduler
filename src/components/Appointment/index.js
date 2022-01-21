@@ -6,6 +6,7 @@ import Empty from "./Empty";
 
 export default function Appointment(props) {
 
+//what is id for??
 const { id, time, interview } = props
 
 return (

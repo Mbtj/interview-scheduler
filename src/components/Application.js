@@ -72,19 +72,19 @@ export default function Application(props) {
     days: [],
     appointments: {}
   });
-  
-  
+
+
   const setDay = day => setState({ ...state, day });
 
   // const setDays = (days) => setState(prev => ({ ...prev, days }));
-  
-  
+
+
 
   useEffect(() => {
     // axios.get("api/days").then(response => {
     //   console.log(response);
     //   // setDays(response.data);
-      
+
     // })
 
     Promise.all([
@@ -95,26 +95,51 @@ export default function Application(props) {
       // console.log(all[0]); // first
       // console.log(all[1]); // second
       // console.log(all[2]); // third
-    
+
       const [days, appointments, interviewers] = all.map(x => x.data);
-    
+
       // console.log("DAYS",days, "APPOINTMENTS",appointments, "INTERVIEWS",interviewers);
       setState(prev =>
-        ({
-          ...prev,
-          days,
-          appointments,
-          interviewers 
-        }));
+      ({
+        ...prev,
+        days,
+        appointments,
+        interviewers
+      }));
     });
 
   }, [])
 
-  console.log(state.days)
+  //console.log(state.days)
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
-  const renderedAppointments = dailyAppointments.map((appointment) =>{
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+
+
+    return axios.put(`api/appointments/${id}`, { interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      });
+  }
+
+  const renderedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
+    console.log('interview from APPLICATION-->', interview)
     const interviewers = getInterviewersForDay(state, state.day);
     return (
       <Appointment
@@ -123,9 +148,12 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
+
+
 
   return (
     <main className="layout">
@@ -140,7 +168,7 @@ export default function Application(props) {
           <DayList
             days={state.days}
             day={state.day}
-            setDay={day => setState({...state, day})}
+            setDay={day => setState({ ...state, day })}
           />
         </nav>
         <img

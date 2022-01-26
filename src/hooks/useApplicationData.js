@@ -68,18 +68,21 @@ export default function useApplicationData() {
 
 
 
-    return (axios.put(`api/appointments/${id}`, { interview })
-      .then(() => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
+    return axios.put(`api/appointments/${id}`, { interview })
       .then(() => {
         const days = updateSpots(id, true);
         console.log(days);
-        setState({...state, days})
-      }));
+        setState({
+          ...state,
+          appointments,
+          days
+        });
+      })
+      // .then(() => {
+      //   const days = updateSpots(id, true);
+      //   console.log(days);
+      //   setState({...state, days})
+      // });
   }
 
   function cancelInterview(id) {
@@ -94,18 +97,16 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    return (axios.delete(`api/appointments/${id}`)
-      .then(() => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
+    return axios.delete(`api/appointments/${id}`)
       .then(() => {
         const days = updateSpots(id, false);
         console.log(days);
-        setState({ ...state, days })
-      }));
+        setState({
+          ...state,
+          appointments,
+          days
+        });
+      });
   }
 
   return {

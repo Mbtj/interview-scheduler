@@ -26,7 +26,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  console.log('INTERVIEW--->', interview)
+  // console.log('INTERVIEW--->', interview)
 
   function save(name, interviewer) {
     const interview = {
@@ -46,7 +46,7 @@ export default function Appointment(props) {
 
 
   function deleteInterview() {
-    console.log('DELETING', id)
+    // console.log('DELETING', id)
 
     transition(DELETING, true);
     cancelInterview(id)
@@ -59,7 +59,7 @@ export default function Appointment(props) {
     back();
     back();
   }
-  console.log(mode);
+  // console.log(mode);
   return (
     <article className="appointment">
       <Header time={time} />

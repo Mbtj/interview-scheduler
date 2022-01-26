@@ -11,6 +11,21 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+  // Updates spots 
+  function updateSpots(id, addorRemove) {
+    // The change made to spots
+    const change = addorRemove ? -1 : 1;
+    let days = [...state.days];
+
+    for (let day of days) {
+      // Only change spots for specific day
+      if (day.appointments.includes(id)) {
+        day.spots += change;
+      }
+    }
+
+    return days;
+  }
 
   useEffect(() => {
 
@@ -33,6 +48,7 @@ export default function useApplicationData() {
         appointments,
         interviewers
       }));
+
     });
 
   }, []);
@@ -50,12 +66,19 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
+
+
     return axios.put(`api/appointments/${id}`, { interview })
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments,
         });
+      })
+      .then(() => {
+        const days = updateSpots(id, true);
+        console.log(days);
+        setState({...state, days})
       });
   }
 
@@ -75,8 +98,13 @@ export default function useApplicationData() {
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments,
         });
+      })
+      .then(() => {
+        const days = updateSpots(id, false);
+        console.log(days);
+        setState({ ...state, days })
       });
   }
 

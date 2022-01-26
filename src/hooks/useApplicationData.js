@@ -68,7 +68,7 @@ export default function useApplicationData() {
 
 
 
-    return axios.put(`api/appointments/${id}`, { interview })
+    return (axios.put(`api/appointments/${id}`, { interview })
       .then(() => {
         setState({
           ...state,
@@ -79,7 +79,7 @@ export default function useApplicationData() {
         const days = updateSpots(id, true);
         console.log(days);
         setState({...state, days})
-      });
+      }));
   }
 
   function cancelInterview(id) {
@@ -94,7 +94,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    return axios.delete(`api/appointments/${id}`)
+    return (axios.delete(`api/appointments/${id}`)
       .then(() => {
         setState({
           ...state,
@@ -105,7 +105,7 @@ export default function useApplicationData() {
         const days = updateSpots(id, false);
         console.log(days);
         setState({ ...state, days })
-      });
+      }));
   }
 
   return {

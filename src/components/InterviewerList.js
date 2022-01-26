@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import classNames from "classnames";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
+import PropTypes from 'prop-types';
 
 // const interviewers = [
 //   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -12,7 +13,7 @@ import InterviewerListItem from "./InterviewerListItem";
 //   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
 // ];
 
-export default function InterviewerList(props) {
+function InterviewerList(props) {
   // const classes = classNames("interviewers");
 
   // alert(props.interviewers);
@@ -37,3 +38,9 @@ export default function InterviewerList(props) {
     </section>
   );
 };
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
+
+export default InterviewerList;

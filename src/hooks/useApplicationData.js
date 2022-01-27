@@ -69,7 +69,7 @@ export default function useApplicationData() {
     // return promise 
     return axios.put(`api/appointments/${id}`, { interview })
       .then(() => {
-        const days = updateSpots(state, appointments, id);
+        updateSpots(state, appointments, id);
         setState({
           ...state,
           appointments
@@ -93,7 +93,7 @@ export default function useApplicationData() {
     // Return promise
     return axios.delete(`api/appointments/${id}`)
       .then(() => {
-        const days = updateSpots(state, appointments, id);
+        updateSpots(state, appointments, id);
         setState({
           ...state,
           appointments

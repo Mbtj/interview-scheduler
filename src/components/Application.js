@@ -17,6 +17,7 @@ export default function Application() {
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
+  // Create array of appointments
   const renderedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);

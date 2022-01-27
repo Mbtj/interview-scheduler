@@ -4,11 +4,13 @@ import classNames from "classnames";
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
+  // write class for daylistitem
   const classes = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": (props.spots === 0) 
   });
 
+  // generate the appropriate text for spopts remaining
   const formatSpots = function() {
     if (props.spots === 0) {
       return `no spots remaining`;

@@ -1,14 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import classNames from "classnames";
 import "components/InterviewerListItem.scss";
 
-// const interviewer = {
-//   id: 1,
-//   name: "Sylvia Palmer",
-//   avatar: "https://i.imgur.com/LpaY82x.png"
-// };
 
 export default function InterviewerListItem(props) {
+  // Write class
   const interviewerClass = classNames("interviewers__item", {
     "interviewers__item--selected": props.selected
   });

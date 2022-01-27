@@ -2,7 +2,6 @@ function getAppointmentsForDay(state, day) {
   const filteredDay = state.days.filter(date => date.name === day);
   if (filteredDay.length > 0) {
     const appoinmentIDs = filteredDay[0].appointments;
-    // console.log(appoinmentIDs);
     return appoinmentIDs.map(id => state.appointments[id]);
   } else {
     return [];
@@ -22,25 +21,14 @@ function getInterview(state, interview) {
 }
 
 function getInterviewersForDay(state, day) {
-  // const filteredDay = state.days.filter(date => date.name === day);
-  // if (filteredDay.length > 0) {
-  //   const appoinmentIDs = filteredDay[0].appointments;
-  //   const appointments = appoinmentIDs.map(id => state.appointments[id]);
+  const filteredDay = state.days.filter(date => date.name === day);
 
-  // } else {
-  //   return [];
-  // }
-  const appointments = getAppointmentsForDay(state, day);
-
-  // Map appointments only for existing interviews
-  const interviewers = (
-    appointments
-      .filter((appointment) => appointment.interview !== null)
-      .map((appointment) => getInterview(state, appointment.interview).interviewer)
-  );
-  
-  // return array of unique interviewers
-  return [...new Set(interviewers)];
+  if (filteredDay.length > 0) {
+    const interviewerIDs = filteredDay[0].interviewers;
+    const interviewers = interviewerIDs.map(id => state.interviewers[id]);
+    return interviewers
+  }
+  return [];
 }
 
 module.exports = { getAppointmentsForDay, getInterview, getInterviewersForDay }

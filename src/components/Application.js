@@ -1,5 +1,4 @@
-import React, { Fragments, useState, useEffect, Fragment } from "react";
-import axios from "axios";
+import React from "react";
 import "components/Application.scss";
 import "components/DayListItem.scss"
 import DayList from "./DayList";
@@ -8,7 +7,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 import useApplicationData from "hooks/useApplicationData";
 
 
-export default function Application(props) {
+export default function Application() {
   const {
     state,
     setDay,
@@ -34,8 +33,6 @@ export default function Application(props) {
     );
   });
 
-
-// console.log(state)
   return (
     <main className="layout">
       <section className="sidebar">
@@ -61,8 +58,8 @@ export default function Application(props) {
       <section className="schedule">
         {renderedAppointments}
         <Appointment
-        key="last"
-        time="5pm"
+          key="last"
+          time="5pm"
         />
       </section>
 

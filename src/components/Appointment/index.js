@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "components/Appointment/styles.scss";
 import Header from "./Header";
 import Show from "./Show";
@@ -26,7 +26,6 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  // console.log('INTERVIEW--->', interview)
 
   function save(name, interviewer) {
     const interview = {
@@ -39,14 +38,10 @@ export default function Appointment(props) {
     bookInterview(id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-    // setTimeout (() => {
-    //   transition(SHOW);
-    // }, 2000);
   }
 
 
   function deleteInterview() {
-    // console.log('DELETING', id)
 
     transition(DELETING, true);
     cancelInterview(id)
@@ -59,7 +54,6 @@ export default function Appointment(props) {
     back();
     back();
   }
-  // console.log(mode);
   return (
     <article className="appointment">
       <Header time={time} />
@@ -118,22 +112,4 @@ export default function Appointment(props) {
       }
     </article>
   );
-
-
-  // return (
-  //   <article className="appointment">
-  //     {
-  //       props.time &&
-  //       <Fragment>
-  //         Appointment at {props.time}
-  //       </Fragment>
-  //     }
-  //     {
-  //       !props.time &&
-  //       <Fragment>
-  //         No Appointments
-  //       </Fragment>
-  //     }
-  //   </article>
-  // );
 }

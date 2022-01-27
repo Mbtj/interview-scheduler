@@ -21,3 +21,7 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Screenshots
+
+![Form element](/docs/appointment-form.png)

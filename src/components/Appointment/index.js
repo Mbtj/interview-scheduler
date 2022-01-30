@@ -49,11 +49,7 @@ export default function Appointment(props) {
     .catch(error => transition(ERROR_DELETE, true));
   }
 
-  // function for 'x' button on error
-  function doubleBack() {
-    back();
-    back();
-  }
+
   return (
     <article className="appointment">
       <Header time={time} />
@@ -100,14 +96,14 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE &&
         <Error
         message="Could not save appointment"
-        onClose={doubleBack}
+        onClose={back}
         />
       }
 
       {mode === ERROR_DELETE &&
         <Error
         message="Could not cancel appointment"
-        onClose={doubleBack}
+        onClose={back}
         />
       }
     </article>

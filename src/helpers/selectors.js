@@ -30,9 +30,14 @@ function getInterviewersForDay(state, day) {
   const filteredDay = state.days.filter(date => date.name === day);
 
   if (filteredDay.length > 0) {
-    const interviewerIDs = filteredDay[0].interviewers;
-    const interviewers = interviewerIDs.map(id => state.interviewers[id]);
-    return interviewers
+    const appointments = filteredDay[0].appointments;
+    const interviews = Object.entries(state.appointments)
+      .map((a) => a[1].interview)
+      .filter(interview => interview !== null);
+
+    const interviewerIDs = [...new Set(interviews.map(i => i.interviewer))];
+    const interviewers = interviewerIDs.map(i => state.interviewers[i]);
+    return interviewers;
   }
   return [];
 }

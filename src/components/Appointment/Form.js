@@ -18,6 +18,7 @@ export default function Form(props) {
   // event when cancel is clicked
   function cancel() {
     props.onCancel();
+    setError("");
     reset();
   };
 
@@ -25,7 +26,7 @@ export default function Form(props) {
   // Checks for valid form fields
   function validate() {
     if (student === "") {
-      setError("Student name cannot be blank");
+      setError("student name cannot be blank");
       return;
     }
     if (interviewer === null) {
